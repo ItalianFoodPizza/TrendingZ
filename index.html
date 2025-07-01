@@ -1,43 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RoundNews Dynamic</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body { background: #f4f4f4; font-family: sans-serif; }
-    .navbar, .footer { background: #fff; border-radius: 0 0 1rem 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .news-card { border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    .news-card img { width: 100%; border-radius: 1rem 1rem 0 0; }
-    .btn-rounded { border-radius: 2rem; }
-  </style>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RoundNews</title>
+  <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
-  <nav class="navbar navbar-light mb-4">
+  <nav class="navbar">
     <div class="container">
-      <a class="navbar-brand fs-3" href="#">RoundNews</a>
+      <a class="brand" href="#">RoundNews</a>
     </div>
   </nav>
 
   <main class="container">
-    <div id="articles" class="row g-4"></div>
+    <div id="articles" class="grid"></div>
   </main>
 
-  <template id="article-template">
-    <div class="col-md-6 col-lg-4">
-      <div class="card news-card">
-        <img src="" alt="News Image">
-        <div class="card-body">
-          <h5 class="card-title"></h5>
-          <p class="card-text"></p>
-          <a href="#" target="_blank" class="btn btn-primary btn-rounded">Read More</a>
-        </div>
+  <template id="article-tpl">
+    <div class="card">
+      <img src="" alt="News Image" class="card-img" />
+      <div class="card-body">
+        <h4 class="card-title"></h4>
+        <p class="card-text"></p>
+        <a href="#" class="btn btn-primary"></a>
       </div>
     </div>
   </template>
 
-  <footer class="footer text-center py-3 mt-5">
+  <footer class="footer">
     &copy; 2025 RoundNews
   </footer>
 
@@ -46,30 +36,32 @@
       {
         img: "https://via.placeholder.com/600x350",
         title: "Trending Headline #1",
-        desc: "A brief overview of the trending story...",
+        desc: "This is a Beebom-style news snippet. Add your description here.",
         url: "#"
       },
       {
         img: "https://via.placeholder.com/600x350",
-        title: "Trending Headline #2",
-        desc: "Another interesting news snippet...",
-        url: "#"
+        title: "Affiliate Deal: Product XYZ",
+        desc: "Overview of product with affiliate link.",
+        url: "https://amzn.to/youraffiliate",
       }
-      // ...add more article objects here
+      // Add more article objects here
     ];
 
-    const container = document.getElementById('articles');
-    const tpl = document.getElementById('article-template');
+    const container = document.getElementById("articles");
+    const tpl = document.getElementById("article-tpl");
 
-    articles.forEach(item => {
-      const clone = tpl.content.cloneNode(true);
-      clone.querySelector('img').src = item.img;
-      clone.querySelector('img').alt = item.title;
-      clone.querySelector('.card-title').textContent = item.title;
-      clone.querySelector('.card-text').textContent = item.desc;
-      clone.querySelector('a').href = item.url;
-      clone.querySelector('a').textContent = item.url.includes('amazon') ? 'Get Deal' : 'Read More';
-      container.appendChild(clone);
+    articles.forEach(a => {
+      const el = tpl.content.cloneNode(true);
+      el.querySelector(".card-img").src = a.img;
+      el.querySelector(".card-img").alt = a.title;
+      el.querySelector(".card-title").textContent = a.title;
+      el.querySelector(".card-text").textContent = a.desc;
+      const btn = el.querySelector(".btn");
+      btn.href = a.url;
+      btn.textContent = a.url.includes("amzn.to") ? "Get Deal" : "Read More";
+      btn.target = a.url.startsWith("http") ? "_blank" : "";
+      container.appendChild(el);
     });
   </script>
 </body>
