@@ -2,65 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RoundNews</title>
-  <link href="styles.css" rel="stylesheet" />
+  <title>TechBuzz News</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="navbar">
-    <div class="container">
-      <a class="brand" href="#">RoundNews</a>
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a class="brand" href="#">TechBuzz</a>
+      <nav class="topics">
+        <a href="#">AI</a>
+        <a href="#">Gadgets</a>
+        <a href="#">Blockchain</a>
+        <a href="#">Programming</a>
+        <a href="#">Startups</a>
+      </nav>
+      <form class="search-bar">
+        <input type="text" placeholder="Search articles...">
+        <button type="submit">🔍</button>
+      </form>
     </div>
-  </nav>
+  </header>
 
-  <main class="container">
-    <div id="articles" class="grid"></div>
+  <main class="container main-grid">
+    <aside class="sidebar">
+      <div class="ad-box">Your Ad Here</div>
+    </aside>
+    <section id="articles" class="articles"></section>
   </main>
 
+  <div class="ad-banner">Banner Ad – 728×90</div>
+  <footer class="footer">&copy; 2025 TechBuzz News</footer>
+
   <template id="article-tpl">
-    <div class="card">
-      <img src="" alt="News Image" class="card-img" />
-      <div class="card-body">
-        <h4 class="card-title"></h4>
+    <article class="card">
+      <img src="" alt="" class="card-img">
+      <div class="card-content">
+        <h2 class="card-title"></h2>
         <p class="card-text"></p>
-        <a href="#" class="btn btn-primary"></a>
+        <a href="#" class="btn"></a>
       </div>
-    </div>
+    </article>
   </template>
 
-  <footer class="footer">
-    &copy; 2025 RoundNews
-  </footer>
-
   <script>
-    const articles = [
-      {
-        img: "https://via.placeholder.com/600x350",
-        title: "Trending Headline #1",
-        desc: "This is a Beebom-style news snippet. Add your description here.",
-        url: "#"
-      },
-      {
-        img: "https://via.placeholder.com/600x350",
-        title: "Affiliate Deal: Product XYZ",
-        desc: "Overview of product with affiliate link.",
-        url: "https://amzn.to/youraffiliate",
-      }
-      // Add more article objects here
+    const articlesData = [
+      { img: 'https://via.placeholder.com/400x250', title: 'AI Breakthrough 2025', desc: 'Discover the world-changing AI model released this month.', url: '#' },
+      { img: 'https://via.placeholder.com/400x250', title: 'Top 5 Gadgets You Need', desc: 'A curated list of must-have gadgets trending now.', url: '#' },
+      // add more articles as needed
     ];
-
-    const container = document.getElementById("articles");
-    const tpl = document.getElementById("article-tpl");
-
-    articles.forEach(a => {
+    const container = document.getElementById('articles');
+    const tpl = document.getElementById('article-tpl');
+    articlesData.forEach(a => {
       const el = tpl.content.cloneNode(true);
-      el.querySelector(".card-img").src = a.img;
-      el.querySelector(".card-img").alt = a.title;
-      el.querySelector(".card-title").textContent = a.title;
-      el.querySelector(".card-text").textContent = a.desc;
-      const btn = el.querySelector(".btn");
+      el.querySelector('.card-img').src = a.img;
+      el.querySelector('.card-img').alt = a.title;
+      el.querySelector('.card-title').textContent = a.title;
+      el.querySelector('.card-text').textContent = a.desc;
+      const btn = el.querySelector('.btn');
       btn.href = a.url;
-      btn.textContent = a.url.includes("amzn.to") ? "Get Deal" : "Read More";
-      btn.target = a.url.startsWith("http") ? "_blank" : "";
+      btn.textContent = a.url.includes('amazon') ? 'Get Deal' : 'Read More';
       container.appendChild(el);
     });
   </script>
